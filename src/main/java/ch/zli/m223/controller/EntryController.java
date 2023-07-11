@@ -1,6 +1,5 @@
 package ch.zli.m223.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.inject.Inject;
