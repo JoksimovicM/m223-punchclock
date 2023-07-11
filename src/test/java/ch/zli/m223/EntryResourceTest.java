@@ -39,4 +39,20 @@ public class EntryResourceTest {
                 .statusCode(204);
     }
 
+    @Test
+    @TestTransaction
+    public void testUpdateEndpoint() {
+        Entry entry = new Entry();
+        entry.setCheckIn(LocalDateTime.now());
+        entry.setCheckOut(LocalDateTime.now());
+
+        given().contentType(ContentType.JSON).body(entry).when().post("/entries");
+
+        entry.setCheckIn(LocalDateTime.of(2023, 7, 12, 7, 0, 0));
+        entry.setCheckOut(LocalDateTime.of(2023, 7, 12, 12, 0, 0));
+        given().contentType(ContentType.JSON).body(entry)
+                .when().put("/entries/{id}", "1")
+                .then().statusCode(204);
+
+    }
 }
